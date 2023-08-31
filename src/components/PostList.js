@@ -43,25 +43,27 @@ const [search,setSearch] = useState("");
   }
 
   return (
-    <div>
+    <div style={{margin:"0px 20px"}}>
       <h1>Posts</h1>
       <form onSubmit={searhPosts}>
-      <input onChange={e=>setSearch(e.target.value)}/>
+      <input onChange={e=>setSearch(e.target.value)} placeholder='Search by @Comany:name or @Role:name' style={{width:'100%'}}/>
         <input type='submit' value="search"/>
       </form>
-      <ul>
+      <ol>
         {posts.map(post => (
           <li key={post.pid} style={{border:'1px solid black'}}>
-            <h2 onClick={() => handlePostClick(post)} style={{ cursor: 'pointer' }}>
-              {post.title}
-            </h2>
+            <div style={{ display:'flex',justifyContent:"space-between" }}>
+                <div></div>
+                <h3>{post.title}</h3>
+            <a onClick={() => handlePostClick(post)} style={{color:'blue',cursor: 'pointer'}}>Read Post</a>
+            </div>
             <p>{post.company} | Role: {post.role}</p>
             {selectedPost && selectedPost.pid === post.pid && (
               <p>{selectedPost.content}</p>
             )}
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
