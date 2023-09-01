@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 
 const Post = ({ post }) => {
+    const[expand,setExpand] = useState("Read Post ➡️")
   const [selectedPost, setSelectedPost] = useState(false);
 
   const handlePostClick = () => {
+    if(selectedPost){
+        setExpand("Read Post ➡️")
+    }
+    else{
+        setExpand("Close Post ❌")
+    }
     setSelectedPost(!selectedPost);
   };
 
@@ -19,7 +26,7 @@ const Post = ({ post }) => {
         onClick={handlePostClick}
         className="text-blue-400 cursor-pointer hover:underline"
       >
-        Read Post ➡️
+        {expand}
       </a>
       </div>
       {selectedPost && <p className="mt-2 text-gray-500 text-xl text-left">{post.content}</p>}
