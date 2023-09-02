@@ -18,7 +18,7 @@ const history = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/users", formData);
+      const response = await axios.post("https://special-pear-production.up.railway.app/users", formData);
       console.log("Signup successful:", response.data);
     history('/login')
     } catch (error) {

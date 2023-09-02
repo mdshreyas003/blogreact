@@ -16,7 +16,7 @@ function User() {
     history('/')
   }
   async function fetchUserPost(){
-    const response = await axios.get(`http://localhost:8080/posts/search/byUser/${id}`);
+    const response = await axios.get(`https://special-pear-production.up.railway.app/posts/search/byUser/${id}`);
 
     // console.log(response.data)
     setUserpost(Array.from(response.data))

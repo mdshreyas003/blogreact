@@ -18,7 +18,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/login', formData);
+      const response = await axios.post('https://special-pear-production.up.railway.app/login', formData);
       if(response.data){
         console.log(response.data)
         setLogin(response.data)

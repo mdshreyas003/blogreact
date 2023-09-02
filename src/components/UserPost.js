@@ -10,7 +10,7 @@ const UserPost = ({ post ,fetchUserPost}) => {
   };
 
   const handleDelete = async () => {
-    const response = await axios.delete(`http://localhost:8080/posts/${post.pid}`);
+    const response = await axios.delete(`https://special-pear-production.up.railway.app/posts/${post.pid}`);
     fetchUserPost();
   };
 
