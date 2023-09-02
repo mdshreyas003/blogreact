@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Post from './Post'; // Import the Post component
+import Search from './Search';
 
 function PostList() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState('');
-
+const [update,setUpdate]=useState(false)
   useEffect(() => {
     // Fetch posts when the component mounts
     fetchPosts();
-  }, []);
+  }, [update]);
 
   const fetchPosts = async () => {
     try {
@@ -23,7 +24,9 @@ function PostList() {
   const searchPosts = async (e) => {
 
     e.preventDefault();
-    if(search.length ===0) return;
+    if(search.length ===0){
+      fetchPosts();
+    }
     var toSearch = '';
     var list = search.split(':');
     var name = list[1];
@@ -46,29 +49,9 @@ function PostList() {
   return (
     <div className="bg-slate-900 text-white min-h-screen">
       <div className="container mx-auto py-8">
-        <div className='mb-4 flex-col flex space-y-3 text-left px-8 py-2 right-0  xl:fixed'>
-        <form onSubmit={searchPosts} className="">
-          <input
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by @Company:name or @Role:name"
-            className="px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 bg-gray-800 text-white"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg ml-2 hover:bg-blue-600">
-            Search
-          </button>
-          
-        </form>
-        <button
-            className="bg-green-400 text-white font-semibold py-2 px-4 rounded-lg ml-2 hover:bg-blue-600"
-            onClick={fetchPosts}
-          >
-            See All Posts
-          </button>
-          </div>
+      <Search setSearch = {setSearch} searchPosts={searchPosts} fetchPosts= {fetchPosts} />
         <div className='w-full flex justify-center '>
-        <div className="mx-auto  space-y-8">
+        <div className="mx-auto  space-y-8 xl:px-96 md:px-20 sm:px-12">
           {posts.map((post) => (
             <Post key={post.pid} post={post} />
           ))}

@@ -1,6 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
-function PostComponent() {
+function PostComponent({id, setPost,fetchUserPost}) {
   const [newPost, setNewPost] = useState({
     title: '',
     description: '',
@@ -9,7 +10,7 @@ function PostComponent() {
     package: '',
     content: '',
     user: {
-      uid: 1, // Replace with the appropriate user ID
+      uid: id, // Replace with the appropriate user ID
     },
   });
 
@@ -18,38 +19,37 @@ function PostComponent() {
     setNewPost((prevPost) => ({ ...prevPost, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  
+const handleSubmit = (event) => {
+  event.preventDefault();
 
-    // Make POST request to create a new post
-    fetch('https://special-pear-production.up.railway.app/posts', {
-      method: 'POST',
+ 
+  axios.post('https://special-pear-production.up.railway.app/posts', newPost, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newPost),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('New post created:', data);
-        // Reset the form fields
-        setNewPost({
-          title: '',
-          description: '',
-          company: '',
-          role: '',
-          package: '',
-          content: '',
-          user: {
-            uid: 1,
-          },
-        });
-      })
-      .catch((error) => console.error('Error creating post:', error));
-  };
-
+    .then((response) => {
+      console.log('New post created:', response.data);
+      // Reset the form fields
+      setPost(false);
+      fetchUserPost();
+      setNewPost({
+        title: '',
+        description: '',
+        company: '',
+        role: '',
+        package: '',
+        content: '',
+        user: {
+          uid: id,
+        },
+      });
+    })
+    .catch((error) => console.error('Error creating post:', error));
+};
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
+    <div className="flex justify-center items-center bg-gray-900 text-white">
       <div className="bg-gray-800 p-8 rounded-lg text-center w-full md:w-1/2 lg:w-1/3">
         <h2 className="text-4xl font-bold mb-4">Create New Post</h2>
         <form onSubmit={handleSubmit}>
