@@ -52,7 +52,7 @@ const [update,setUpdate]=useState(false)
       <Search setSearch = {setSearch} searchPosts={searchPosts} fetchPosts= {fetchPosts} />
         <div className='w-full flex justify-center '>
         <div className="mx-auto  space-y-8 xl:px-96 md:px-20 sm:px-12">
-          {posts.map((post) => (
+          {posts.reverse() && posts.map((post) => (
             <Post key={post.pid} post={post} />
           ))}
         </div>
