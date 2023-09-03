@@ -51,7 +51,7 @@ const [update,setUpdate]=useState(false)
       <div className="container mx-auto py-8">
       <Search setSearch = {setSearch} searchPosts={searchPosts} fetchPosts= {fetchPosts} />
         <div className='w-full flex justify-center '>
-        <div className="mx-auto  space-y-8 xl:px-96 md:px-20 sm:px-12">
+        <div className="mx-auto  space-y-8 xl:w-6/12 md:w-5/6 sm:w-2/3">
           {posts.reverse() && posts.map((post) => (
             <Post key={post.pid} post={post} />
           ))}
