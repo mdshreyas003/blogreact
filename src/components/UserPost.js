@@ -15,11 +15,12 @@ const UserPost = ({ post ,fetchUserPost}) => {
   };
 
   return (
-    <div className="bg-gray-900 text-white rounded-lg shadow-lg p-8 border border-gray-600 hover:shadow-xl">
-      <div className="flex items-center mb-2">
+    <div className="bg-gray-900 text-white rounded-lg shadow-lg p-4 border border-gray-600 hover:shadow-xl">
+      <div className="flex items-center justify-between mb-2">
         <div className="text-2xl text-gray-400 text-left font-semibold">{post.title}</div>
         <button onClick={handleDelete} className="text-red-500 p-2 rounded-full hover:bg-red-500 hover:text-white">
-          <img width={'80px'} height={'80px'} src={deleteIMG}/>
+          <img width={'60px'} height={'60px'} src={deleteIMG}/>
+          Delete
         </button>
       </div>
 

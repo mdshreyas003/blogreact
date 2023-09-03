@@ -42,7 +42,7 @@ function User() {
         <div className="text-center mt-4">
           <h1 className="text-2xl font-semibold">{login.name}</h1>
           <p className="text-gray-600">{login.email}</p>
-          <p className="text-gray-600">Blogs: {login.blogs}</p>
+          <p className="text-gray-600">Blog count: {userpost.length}</p>
         </div>
         </div>
         {!post && <Link onClick={()=>{
@@ -53,12 +53,16 @@ function User() {
         }
         <button className='bg-orange-600 p-2 rounded-xl ' onClick={logout}>Logout</button>
       </div>
-        <div className='grid grid-cols-3 gap-12'>
+      <h2 className='text-2xl font-semibold text-blue-300 mb-4 '>User Posts</h2>
+      <div className='w-full flex justify-center'>
+        
+        <div className='grid grid-cols-1 gap-12 w-6/12'>
         {!post && userpost.map((e)=>{
           return(
             <UserPost fetchUserPost={fetchUserPost} post={e}/>
             )
           })}
+        </div>
         </div>
           { post && <div> <PostComponent fetchUserPost={fetchUserPost} setPost={setPost}  id={id}/>  </div>}
     </div>
